@@ -1,6 +1,6 @@
 # spielerei-katalog-backend
 
-docker-compose and spring expect the following environment variables:
+docker-compose.yml and springs application.properties expect the following environment variables:
 ```properties
 MYSQL_DATABASE=a-database-name
 MYSQL_ROOT_PASSWORD=a-database-pw
