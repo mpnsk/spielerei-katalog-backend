@@ -1,5 +1,7 @@
 package de.spielerei_eichstaett.katalog.db;
 
+import de.spielerei_eichstaett.katalog.security.Sudo;
+import de.spielerei_eichstaett.katalog.web.SpielRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -46,8 +48,10 @@ public class Init implements CommandLineRunner {
                 .withKategorie(Spiel.Kategorie.Strategie)
                 .withId(2);
 
-        repo.save(utopia);
-        repo.save(glasStrasse);
-        repo.findAll().forEach(System.out::println);
+        try (Sudo sudo = new Sudo()) {
+//            repo.save(utopia);
+//            repo.save(glasStrasse);
+            repo.findAll().forEach(System.out::println);
+        }
     }
 }
