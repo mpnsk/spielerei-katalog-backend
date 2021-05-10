@@ -24,7 +24,7 @@ public class UserInit implements CommandLineRunner {
                 .withUsername("user")
 //                .withUserRoles(List.of(UserRole.USER));
                 ;
-        userRepo.save(u1);
+//        userRepo.save(u1);
         userRepo.findAll().forEach(System.out::println);
     }
 }
