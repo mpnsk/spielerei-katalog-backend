@@ -1,14 +1,13 @@
-package de.spielerei_eichstaett.katalog.db;
+package de.spielerei_eichstaett.katalog.spiel;
 
 import de.spielerei_eichstaett.katalog.security.Sudo;
-import de.spielerei_eichstaett.katalog.web.SpielRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @AllArgsConstructor
-public class Init implements CommandLineRunner {
+public class SpielInit implements CommandLineRunner {
     SpielRepository repo;
 
     @Override
