@@ -20,12 +20,12 @@ public class SpielInit implements CommandLineRunner {
                                           Das Ziel des Spieles ist es, derjenige zu sein, der mindestens 50 Prestige-Punkte gesammelt hat. Außerdem darf natürlich gebaut, Ränke geschmiedet und vor allem begeistert gespielt werden.
                                           """)
                 .withErscheinugsjahr("2007")
-                .withSpieldauerMinuten(60)
+                .withSpieldauerMinutenMin(60)
                 .withSpieleranzahlMin(2)
                 .withSpieleranzahlMax(5)
                 .withAltersempfehlung(10)
                 .withLeihpreis(4)
-                .withKategorie(Spiel.Kategorie.Strategie)
+//                .withKategorie(Spiel.Kategorie.Strategie)
                 .withId(1);
 
         var glasStrasse = new Spiel()
@@ -38,13 +38,13 @@ public class SpielInit implements CommandLineRunner {
                                           Ob alleine, zu zweit oder zu mehreren: Die Glasstraße ist immer ein Vergnügen!
                                           """)
                 .withErscheinugsjahr("2009")
-                .withSpieldauerMinuten(20)
+                .withSpieldauerMinutenMin(20)
                 .withSpieldauerTyp(Spiel.SpieldauerTyp.ProSpieler)
                 .withSpieleranzahlMin(1)
                 .withSpieleranzahlMax(4)
                 .withAltersempfehlung(12)
                 .withLeihpreis(3)
-                .withKategorie(Spiel.Kategorie.Strategie)
+//                .withKategorie(Spiel.Kategorie.Strategie)
                 .withId(2);
 
         try (Sudo sudo = new Sudo()) {
