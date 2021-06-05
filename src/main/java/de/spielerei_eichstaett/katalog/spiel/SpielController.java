@@ -38,9 +38,13 @@ public class SpielController {
     Map<String, List<Spiel>> byKategorieMap() {
         Map<String, List<Spiel>> map = new HashMap<>();
         kategorieRepository.findAll().forEach(kategorie -> map.put(kategorie.getName(), new ArrayList<>()));
+        List.of("Ankündigungen", "In Reparatur", "Allgemeine Informationen", "Entliehen", "eingelagert")
+                .forEach(map::remove);
         spielRepository.findAll().forEach(spiel -> {
-            map.get(spiel.getKategorie().getName())
-                    .add(spiel);
+            final var kategorie = spiel.getKategorie().getName();
+            if (map.containsKey(kategorie)) {
+                map.get(kategorie).add(spiel);
+            }
         });
         return map;
     }
