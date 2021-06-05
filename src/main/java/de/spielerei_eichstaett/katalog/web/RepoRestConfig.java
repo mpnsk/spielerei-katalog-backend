@@ -17,5 +17,6 @@ public class RepoRestConfig implements RepositoryRestConfigurer {
 //        TODO later we might normalize the json tree and get Spiel.Kategorie only by id
         config.exposeIdsFor(Spiel.Kategorie.class);
         config.exposeIdsFor(Spiel.class);
+        cors.addMapping("/**").allowedOrigins("*").allowedHeaders("*");
     }
 }
