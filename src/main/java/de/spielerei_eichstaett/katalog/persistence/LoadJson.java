@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.spielerei_eichstaett.katalog.security.Sudo;
 import de.spielerei_eichstaett.katalog.spiel.Spiel;
 import de.spielerei_eichstaett.katalog.spiel.SpielKategorieRepository;
-import de.spielerei_eichstaett.katalog.spiel.SpielRepository;
+import de.spielerei_eichstaett.katalog.spiel.SpielRepositoryPermissions;
 import de.spielerei_eichstaett.trello.dto.TrelloBoard;
 import de.spielerei_eichstaett.trello.dto.TrelloList;
 import de.spielerei_eichstaett.trello.dto.card.TrelloCard;
@@ -22,7 +22,7 @@ import java.util.Map;
 //@Component
 @AllArgsConstructor
 public class LoadJson {
-    SpielRepository spielRepository;
+    SpielRepositoryPermissions spielRepository;
     SpielKategorieRepository spielKategorieRepository;
 
 
