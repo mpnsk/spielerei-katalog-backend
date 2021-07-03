@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -46,6 +47,9 @@ public class Spiel {
     @RestResource
     //@JsonProperty("k")
     Kategorie kategorie;
+    String coverBildId;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Attachment> attachments;
 
     public enum SpieldauerTyp {
         Einwert,
@@ -65,5 +69,32 @@ public class Spiel {
         @JsonIgnore
         String trelloId;
 
+    }
+
+    @Entity
+    @Getter
+    @Setter
+    public static class Attachment {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        int id;
+        String trelloId;
+        String name;
+        @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+        List<Preview> preview;
+
+        @Entity
+        @Getter
+        @Setter
+        public static class Preview {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            int id;
+            String trelloId;
+            int height;
+            int width;
+            int bytes;
+            boolean scaled;
+        }
     }
 }
