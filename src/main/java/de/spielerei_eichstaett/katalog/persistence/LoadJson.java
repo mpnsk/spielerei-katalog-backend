@@ -2,7 +2,6 @@ package de.spielerei_eichstaett.katalog.persistence;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.spielerei_eichstaett.katalog.security.Sudo;
 import de.spielerei_eichstaett.katalog.spiel.Spiel;
 import de.spielerei_eichstaett.katalog.spiel.SpielKategorieRepository;
 import de.spielerei_eichstaett.katalog.spiel.SpielRepositoryPermissions;
@@ -13,13 +12,14 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.TrelloCardToSpielConverter;
 import org.example.TrelloListToSpielKategorieConverter;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-//@Component
+@Component
 @AllArgsConstructor
 public class LoadJson {
     SpielRepositoryPermissions spielRepository;
@@ -31,7 +31,7 @@ public class LoadJson {
     public void postConstruct() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        final var converter = new TrelloCardToSpielConverter();
+        final var cardToSpiel = new TrelloCardToSpielConverter();
 
         final var trelloBoard = objectMapper.readValue(LoadJson.class.getClassLoader().getResource("spielerei.json"), TrelloBoard.class);
 
@@ -54,7 +54,7 @@ public class LoadJson {
 
         for (TrelloCard card : cards) {
             try {
-                final var spiel = converter.apply(card);
+                final var spiel = cardToSpiel.apply(card);
                 spiel.setKategorie(kategorieMap.get(card.getIdList()));
                 spiele.add(spiel);
             } catch (Exception e) {
@@ -62,11 +62,11 @@ public class LoadJson {
                 e.printStackTrace();
             }
         }
-        try (Sudo sudo = new Sudo()) {
-            spielKategorieRepository.saveAll(kategorieMap.values());
-            spielRepository.saveAll(spiele);
-        }
-//        System.out.println("spiele = " + spiele);
+//        try (Sudo sudo = new Sudo()) {
+//            spielKategorieRepository.saveAll(kategorieMap.values());
+//            spielRepository.saveAll(spiele);
+//        }
+        System.out.println("spiele = " + spiele);
 
     }
 }
